@@ -1,95 +1,65 @@
 /**
- * Class to simulate the database for doctors.
+ * Doctor class.
  */
 
 package com.vynipox.glm;
 
-import java.util.Map.Entry;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
 public class Doctor {
-
-	//Declaring arrays for names, last names and specializations.
-	private final String[] names 	       = {"Stive","Erik","Bret","Benjamin","Greg","Patrik","Elie"};
-	private final String[] lastNames 	   = {"Jobs","Hanson","Kornet","Brezenk","Litle","Layout","Bah"};
-	private final String[] specializations = {"Lohr","Surgeon","Beautician","Cardiologist","Therapist"};
-	
 	//Declaring variables for doctor name, last name and specialization.	
 	private String name;
 	private String lastName;
 	private String specialization;
 	
-	//Declaring variables for doctor cabinet and spezialNumber.
+	//Declaring variables for doctor cabinet.
 	private int cabinet;
-	private int spezialNumber;
-
-	//Declaring collections for doctors.
-	private static int unicIndex = 0;
-	private static Map<Integer, String> map = new HashMap<Integer, String>();
-	private static Map<Integer, String> mapParameters = new HashMap<Integer, String>();
-	
-	private String list;
 	
 	/**
 	 * Class constructor.
+	 * @param name
+	 * @param lastName
+	 * @param cabinet
+	 * @param specialization
 	 */
-	public Doctor()
+	public Doctor(String name, String lastName, int cabinet, String specialization)
 	{
-		Random rand = new Random();
-
-		//Auto-fill data.
-		name 		   = names[rand.nextInt(7)];
-		lastName 	   = lastNames[rand.nextInt(7)];
-		specialization = specializations[rand.nextInt(5)];
-		cabinet 	   = rand.nextInt(10) + 100;
-		spezialNumber  = unicIndex;
-
-		list = name + " " + lastName + " " + specialization + " " + cabinet;
-
-		map.put(spezialNumber, specialization);
-		mapParameters.put(spezialNumber, list);
-		
-		System.out.printf("Doctror:%s %s,Specialization - %s, Cabinet - %d\n",name,lastName,specialization,cabinet);
-
-		unicIndex++;
+		this.setName(name);
+		this.setLastName(lastName);
+		this.setCabinet(cabinet);
+		this.setSpecialization(specialization);	
 	}
 	
-	/**
-	 * Get method for the map collection.
-	 * @return
+	/*
+	 * Getters and setters for doctor variables.
 	 */
-	public static Map<Integer, String> getMap() {
-		return map;
+	public String getName() {
+		return name;
 	}
 
-	/**
-	 * Set method for the map collection.
-	 * @param map
-	 */
-	public static void setMap(Map<Integer, String> map) {
-		Doctor.map = map;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	/**
-	 * Static method which returns information about the doctor.
-	 * @param i
-	 * @return
-	 */
-	public static String getMapParameters(Integer i)
-	{
-		String value = "";
-		
-		for( Entry<Integer, String> entry : mapParameters.entrySet())
-		{
-			if(entry.getKey().equals(i))
-			{
-				value = entry.getValue();
-				break;
-			}
-		}
-		
-		return value;
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getSpecialization() {
+		return specialization;
+	}
+
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
+	}
+
+	public int getCabinet() {
+		return cabinet;
+	}
+
+	public void setCabinet(int cabinet) {
+		this.cabinet = cabinet;
 	}
 }

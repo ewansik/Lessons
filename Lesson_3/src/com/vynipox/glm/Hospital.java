@@ -1,97 +1,179 @@
 /**
- * The program simulates the operation of the registry in hospital.
+ * Hospital class.
  */
 
 package com.vynipox.glm;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Hospital {
 
-	//Declaring static variables to check the name and last name input.
-	private static boolean checkName = false;
-	private static boolean checkLastName = false;
+	private Random random;
 	
-	private static Scanner scan = new Scanner(System.in);
-	private static Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
-	private static Matcher matcher;
+	//Declaring lists for doctors and patients.
+	private List<Doctor> doctors;
+	private List<Patient> patients;
 	
-	//Declaring static variables for patient name and last name.
-	private static String inputName = "";
-	private static String inputLastName = "";
-
-	private static int count = 1;
+	//Declaring arrays for random values.
+	private final String[] diagnosisFor    = {"Lohr","Surgeon","Beautician","Cardiologist","Therapist"};
+	private final String[] names 	       = {"Stive","Erik","Bret","Benjamin","Greg","Patrik","Elie"};
+	private final String[] lastNames 	   = {"Jobs","Hanson","Kornet","Brezenk","Litle","Layout","Bah"};
 	
-	public static void main(String[] args) {
+	/**
+	 * Class constructor.
+	 */
+	public Hospital()
+	{
+		doctors  = new ArrayList<Doctor>();
+		patients = new ArrayList<Patient>();
+		random   = new Random();
+	}
 
-		System.out.println("Welcome to our hospital!\n");
-		System.out.println("Today work:");
-		System.out.println("--------------------------------------------------------------------");
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+	public List<Patient> getPatients() {
+		return patients;
+	}
+	
+	/**
+	 * Method of creating patients. 
+	 * @param name
+	 * @param lastName
+	 * @param age
+	 * @param diagnosis
+	 */
+	public void createPatient(String name, String lastName, int age, String diagnosis)
+	{
+		Patient patient = new Patient(name, lastName, age, diagnosis);
 		
-		//Call the class constructor.
-		new Doctor();
-		new Doctor();
-		new Doctor();
-		new Doctor();
-		new Doctor();
-
-		//Create the new object Patient class.
-		Patient pat  = new Patient();
-		Patient pat2 = new Patient();
-		Patient pat3 = new Patient();
-		Patient pat4 = new Patient();
-		Patient pat5 = new Patient();
-
-		System.out.println("--------------------------------------------------------------------");		
-		System.out.println("Please fill in the name  and last name of the patients.\n");
-
-		//Specifies the name and last name and another parameters. 
-		setParameters(pat);
-		pat.setParameters();
-		setParameters(pat2);
-		pat2.setParameters();
-		setParameters(pat3);
-		pat3.setParameters();
-		setParameters(pat4);
-		pat4.setParameters();
-		setParameters(pat5);
-		pat5.setParameters();
-
-		//Output data of the patient.
-		Patient.outputPatient();
-		
-		//Compare and output patient and doctor.
-		Registry.matchPatienDoctor();
-		
-		scan.close();
+		patients.add(patient);
+	}
+	
+	/**
+	 * Method of creating random patients. 
+	 */
+	public void createRandomPatient()
+	{
+		this.createPatient(this.randomizeString(names),this.randomizeString(lastNames),random.nextInt(100),this.randomizeString(diagnosisFor));
+	}
+	
+	/**
+	 * Method of creating custom patients. 
+	 * @param scaner
+	 */
+	public void createCustomPatient(Scanner scaner)
+	{	
+		this.createPatient(this.inputString("Enter the name of the patient:",scaner),this.inputString("Enter the last name of the patient:",scaner),random.nextInt(100),this.randomizeString(diagnosisFor));
 	}
 
 	/**
-	 * Initialization method name and last name.
-	 * @param pat
+	 * Method of creating doctors. 
+	 * @param name
+	 * @param lastName
+	 * @param cabinet
+	 * @param specialization
 	 */
-	private static void setParameters(Patient pat) {
+	public void createDoctor(String name, String lastName, int cabinet, String specialization)
+	{
+		Doctor doctor = new Doctor(name, lastName, cabinet, specialization);
 		
-		//Until the name is entered correctly.
-		while (!checkName) 
+		doctors.add(doctor);
+	}
+	
+	/**
+	 * Method of creating random doctors. 
+	 */
+	public void createRandomDoctor()
+	{
+		this.createDoctor(this.randomizeString(names),this.randomizeString(lastNames),random.nextInt(100),this.randomizeString(diagnosisFor));
+	}
+
+	/**
+	 * Method of creating random values. 
+	 * @param strings
+	 * @return
+	 */
+	private String randomizeString(String[] strings)
+	{
+		String string;
+		
+		string = strings[random.nextInt(strings.length)];
+	
+		return string;
+	}
+	
+	/**
+	 * Method of matching doctors and patients. 
+	 * @return
+	 */
+	public Map<Patient, List<Doctor>> getMatches()
+	{
+		Map<Patient, List<Doctor>> mapMatches = new HashMap<Patient, List<Doctor>>();
+		Iterator<Patient> itrPatient = patients.iterator();
+		
+		Doctor doctor;
+		Patient patient;
+		
+		while(itrPatient.hasNext())  
 		{
-			System.out.printf("Enter the name of the %d patient:", count);
+			patient = itrPatient.next();
 			
-			inputName = scan.nextLine();
-			matcher = pattern.matcher(inputName);
+			List<Doctor> theseDoctors = new ArrayList<Doctor>();
+			Iterator<Doctor>  itrDoctor  = doctors.iterator();
+			
+			while(itrDoctor.hasNext())
+			{
+				doctor = itrDoctor.next();
+				
+				if(patient.getDiagnosis().equals(doctor.getSpecialization()))
+				{
+					theseDoctors.add(doctor);
+				}
+			}	
+			
+			mapMatches.put(patient, theseDoctors);
+		}
+
+		return mapMatches;
+	}
+		
+	/**
+	 * Method of input values from console patients. 
+	 * @param message
+	 * @param scaner
+	 * @return
+	 */
+	private String inputString(String message, Scanner scaner) {
+		
+		Matcher matcher;
+		Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
+		boolean check = false;
+		String inputString = "";
+		
+		while (!check) 
+		{
+			System.out.printf("%s", message);
+			
+			inputString = scaner.nextLine();
+			matcher = pattern.matcher(inputString);
 			
 			//If will be entered "exit" then program will be stopped.
-			if (inputName.toLowerCase().equals("exit")) 
+			if (inputString.toLowerCase().equals("exit")) 
 			{
 				System.exit(-1);
 			} 
 			else if (matcher.matches())
 			{
-				//Specifies the name of the patient.
-				pat.setName(inputName);
-				checkName = true;
+				check = true;
 			} 
 			else 
 			{
@@ -99,34 +181,36 @@ public class Hospital {
 			}
 		}
 		
-		//Until the last name is entered correctly.
-		while (!checkLastName)
-		{
-			System.out.printf("Enter the last name of the %d patient:", count);
-			
-			inputLastName = scan.nextLine();
-			matcher = pattern.matcher(inputLastName);
-			
-			//If will be entered "exit" then program will be stopped.
-			if (inputLastName.toLowerCase().equals("exit")) 
-			{
-				System.exit(-1);
-			} 
-			else if (matcher.matches()) 
-			{
-				////Specifies the last name of the patient.
-				pat.setLastName(inputLastName);
-				checkLastName = true;
-			} 
-			else 
-			{
-				System.out.println("Wrong format. Please, try again.");
-			}
-		}
-
-		count++;
+		return inputString;
+	}
+	
+	/**
+	 * Method of output patients. 
+	 */
+	public void outputPatients()
+	{
+		Patient patient;
+		Iterator<Patient> intItr = patients.iterator();
 		
-		checkName = false;
-		checkLastName = false;
+		System.out.println("Patients:");
+		while(intItr.hasNext())  {
+			patient = intItr.next();
+			   System.out.printf("Name - %s, Last Name - %s, Age - %d, Diagnosis - %s \n", patient.getName(),patient.getLastName(),patient.getAge(),patient.getDiagnosis());
+			}
+	}
+	
+	/**
+	 * Method of output doctors. 
+	 */
+	public void outputDoctors()
+	{
+		Doctor doctor;
+		Iterator<Doctor> intItr = doctors.iterator();
+		
+		System.out.println("Doctors:");
+		while(intItr.hasNext())  {
+			doctor = intItr.next();
+			   System.out.printf("Name - %s, Last Name - %s, Cabinet - %d, Specialization - %s \n", doctor.getName(),doctor.getLastName(),doctor.getCabinet(),doctor.getSpecialization());
+			}
 	}
 }
