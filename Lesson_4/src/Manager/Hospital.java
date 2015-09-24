@@ -2,7 +2,7 @@
  * Class hospital.
  */
 
-package model;
+package Manager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +13,10 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import model.Doctor;
+import model.Patient;
+import model.Personal;
 
 public class Hospital {
 
