@@ -159,10 +159,10 @@ public class Hospital {
 		Random random = new Random();
 		Calendar calendar = Calendar.getInstance();
 		
-		int startYear = 1960; 
+		int startYear = 1950; 
 		int endYear   = 2015;
 		
-	    calendar.set(startYear + (int)Math.round(Math.random() * (endYear - startYear)),random.nextInt(11),random.nextInt(31),random.nextInt(24), random.nextInt(60));
+	    calendar.set(startYear + (int)Math.round(Math.random() * (endYear - startYear)),random.nextInt(11),random.nextInt(31) + 1,random.nextInt(24), random.nextInt(60));
 		return calendar;
 	}
 	
@@ -270,24 +270,56 @@ public class Hospital {
 			}
 	}
 	
-	/**
-	 * Method of output average date.
-	 * @return
-	 */
-	public long outputDates()
+	
+	public void outputAverageDate()
 	{
 		int count = 0;
 		Iterator<Doctor> intItr = doctors.iterator();
-		long dates = 0;
 		
+		Calendar doctorsBirthday = Calendar.getInstance();
+		Calendar today = Calendar.getInstance();
+		Calendar average = Calendar.getInstance();
+		Calendar currentDate;
+	
 		while(intItr.hasNext())  
 		{
-			dates += intItr.next().getCalendar().getTimeInMillis();
+			currentDate = intItr.next().getCalendar();
+			
+			if(count == 0)
+			{
+				doctorsBirthday.set(Calendar.YEAR, currentDate.get(Calendar.YEAR));
+				doctorsBirthday.set(Calendar.MONTH, currentDate.get(Calendar.MONTH));
+				doctorsBirthday.set(Calendar.DAY_OF_MONTH, currentDate.get(Calendar.DAY_OF_MONTH));
+				doctorsBirthday.set(Calendar.HOUR_OF_DAY, currentDate.get(Calendar.HOUR_OF_DAY));
+				doctorsBirthday.set(Calendar.MINUTE, currentDate.get(Calendar.MINUTE));
+			}
+			else
+			{
+				doctorsBirthday.add(Calendar.YEAR, currentDate.get(Calendar.YEAR));
+				doctorsBirthday.add(Calendar.MONTH, currentDate.get(Calendar.MONTH));
+				doctorsBirthday.add(Calendar.DAY_OF_MONTH, currentDate.get(Calendar.DAY_OF_MONTH));
+				doctorsBirthday.add(Calendar.HOUR_OF_DAY, currentDate.get(Calendar.HOUR_OF_DAY));
+				doctorsBirthday.add(Calendar.MINUTE, currentDate.get(Calendar.MINUTE));
+			}
 			count++;
 		}
 		
-		return dates/count;
+		average.set(Calendar.YEAR, doctorsBirthday.get(Calendar.YEAR)/count);
+		average.set(Calendar.MONTH, doctorsBirthday.get(Calendar.MONTH)/count);
+		average.set(Calendar.DAY_OF_MONTH, doctorsBirthday.get(Calendar.DAY_OF_MONTH)/count);
+		average.set(Calendar.HOUR_OF_DAY, doctorsBirthday.get(Calendar.HOUR_OF_DAY)/count);
+		average.set(Calendar.MINUTE, doctorsBirthday.get(Calendar.MINUTE)/count);
+		
+		today.add(Calendar.YEAR, -doctorsBirthday.get(Calendar.YEAR)/count);
+		today.add(Calendar.MONTH, -doctorsBirthday.get(Calendar.MONTH)/count);
+		today.add(Calendar.DAY_OF_MONTH, -doctorsBirthday.get(Calendar.DAY_OF_MONTH)/count);
+		today.add(Calendar.HOUR_OF_DAY, -doctorsBirthday.get(Calendar.HOUR_OF_DAY)/count);
+		today.add(Calendar.MINUTE, -doctorsBirthday.get(Calendar.MINUTE)/count);
+			
+		System.out.printf("Average date: %d.%d.%d %d:%d\n",average.get(Calendar.YEAR), average.get(Calendar.MONTH), average.get(Calendar.DAY_OF_MONTH), average.get(Calendar.HOUR), average.get(Calendar.MINUTE));
+		System.out.printf("Average age: %d.%d.%d %d:%d\n",today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.HOUR), today.get(Calendar.MINUTE));
 	}
+	
 	
 	/**
 	 * Method of output doctor date.

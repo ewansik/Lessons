@@ -3,7 +3,6 @@
  */
 package com.vynipox.glm;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +24,6 @@ public class Main {
 		Patient patient;		
 		Map<Patient, List<Doctor>> list = new HashMap<Patient, List<Doctor>>();
 		boolean checkDoctors = false;
-		
-		String aMpM = "";
-		
-		Calendar calendarOutput = Calendar.getInstance();
 		
 		Hospital hospital = new Hospital();
 		
@@ -90,16 +85,7 @@ public class Main {
 			System.out.println("--------------------------------------------------------------------------");
 		}
 		
-		calendarOutput.setTimeInMillis(hospital.outputDates());
-		if(calendarOutput.get(Calendar.AM_PM) == 0)
-		{
-			aMpM = "AM";
-		}
-		else
-		{
-			aMpM = "PM";
-		}
-		System.out.printf("Average date: %d.%d.%d %d:%d%s\n",calendarOutput.get(Calendar.YEAR), calendarOutput.get(Calendar.MONTH), calendarOutput.get(Calendar.DAY_OF_MONTH), calendarOutput.get(Calendar.HOUR), calendarOutput.get(Calendar.MINUTE),aMpM);
+		hospital.outputAverageDate();
 		
 		scaner.close();
 		
