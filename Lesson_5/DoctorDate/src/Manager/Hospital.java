@@ -273,7 +273,7 @@ public class Hospital {
 	
 	public void outputAverageDate()
 	{
-		int count = 0;
+		double count = 0;
 		Iterator<Doctor> intItr = doctors.iterator();
 		
 		Calendar doctorsBirthday = Calendar.getInstance();
@@ -304,17 +304,18 @@ public class Hospital {
 			count++;
 		}
 		
-		average.set(Calendar.YEAR, doctorsBirthday.get(Calendar.YEAR)/count);
-		average.set(Calendar.MONTH, doctorsBirthday.get(Calendar.MONTH)/count);
-		average.set(Calendar.DAY_OF_MONTH, doctorsBirthday.get(Calendar.DAY_OF_MONTH)/count);
-		average.set(Calendar.HOUR_OF_DAY, doctorsBirthday.get(Calendar.HOUR_OF_DAY)/count);
-		average.set(Calendar.MINUTE, doctorsBirthday.get(Calendar.MINUTE)/count);
-		
-		today.add(Calendar.YEAR, -doctorsBirthday.get(Calendar.YEAR)/count);
-		today.add(Calendar.MONTH, -doctorsBirthday.get(Calendar.MONTH)/count);
-		today.add(Calendar.DAY_OF_MONTH, -doctorsBirthday.get(Calendar.DAY_OF_MONTH)/count);
-		today.add(Calendar.HOUR_OF_DAY, -doctorsBirthday.get(Calendar.HOUR_OF_DAY)/count);
-		today.add(Calendar.MINUTE, -doctorsBirthday.get(Calendar.MINUTE)/count);
+	    average.set(Calendar.YEAR, (int) (doctorsBirthday.get(Calendar.YEAR)/count));
+	    average.set(Calendar.MONTH, (int)(((doctorsBirthday.get(Calendar.YEAR)%count)/count * 11) + (doctorsBirthday.get(Calendar.MONTH)/count)));
+	    average.set(Calendar.DAY_OF_MONTH, (int)((doctorsBirthday.get(Calendar.MONTH)%count)/count * doctorsBirthday.getActualMaximum(Calendar.DAY_OF_MONTH) + doctorsBirthday.get(Calendar.DAY_OF_MONTH)/count));
+	    average.set(Calendar.HOUR, (int)(((doctorsBirthday.get(Calendar.DAY_OF_MONTH)%count)/count * 11) + (doctorsBirthday.get(Calendar.HOUR)/count)));
+	    average.set(Calendar.MINUTE, (int)(((doctorsBirthday.get(Calendar.HOUR)%count)/count * 59) + (doctorsBirthday.get(Calendar.MINUTE)/count)));
+
+	    
+		today.add(Calendar.YEAR, -average.get(Calendar.YEAR));
+		today.add(Calendar.MONTH, -average.get(Calendar.MONTH));
+		today.add(Calendar.DAY_OF_MONTH, -average.get(Calendar.DAY_OF_MONTH));
+		today.add(Calendar.HOUR_OF_DAY, -average.get(Calendar.HOUR_OF_DAY));
+		today.add(Calendar.MINUTE, -average.get(Calendar.MINUTE));
 			
 		System.out.printf("Average date: %d.%d.%d %d:%d\n",average.get(Calendar.YEAR), average.get(Calendar.MONTH), average.get(Calendar.DAY_OF_MONTH), average.get(Calendar.HOUR), average.get(Calendar.MINUTE));
 		System.out.printf("Average age: %d.%d.%d %d:%d\n",today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.HOUR), today.get(Calendar.MINUTE));
