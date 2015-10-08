@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Hospital>
+  <HospitalName>Hello!</HospitalName>
+  <Patient>
+    <Age>10</Age>
+    <Name>Igor</Name>
+    <Surname>Flagov</Surname>
+  </Patient>
+</Hospital>
