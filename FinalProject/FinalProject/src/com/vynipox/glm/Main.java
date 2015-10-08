@@ -1,0 +1,8 @@
+package com.vynipox.glm;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+	}
+}
