@@ -7,8 +7,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import model.Hospital;
+
 public abstract class MyThread extends Thread{
 
+	private Hospital hospital;
 	private String urlDocument;
 	
 	public MyThread(String url)
@@ -16,12 +19,27 @@ public abstract class MyThread extends Thread{
 		this.setUrl(url);
 	}
 	
+	public Hospital getHospital() {
+		return hospital;
+	}
+
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
+
+
 	public String getUrl() {
 		return urlDocument;
 	}
 
 	public void setUrl(String url) {
 		this.urlDocument = url;
+	}
+	
+	@Override
+	public void run() {
+		Parsing();
 	}
 
 	public BufferedReader UrlConnection()

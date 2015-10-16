@@ -14,10 +14,11 @@ public class Doctor {
 	private int yearEperience;
 	private List<String> typeList;
 	private boolean visible;
-	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	private SimpleDateFormat format;
 	
 	public Doctor()
 	{
+		format = new SimpleDateFormat("yyyy-MM-dd");
 		typeList = new ArrayList<String>();
 	}
 	
