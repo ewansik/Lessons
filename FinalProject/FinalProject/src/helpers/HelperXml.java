@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package helpers;
 
 import java.io.IOException;
@@ -18,11 +21,12 @@ public class HelperXml extends MyThread{
 	}
 
 	@Override
-	public void Parsing() {
+	public void parsing() {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		MySAXParser mySAXParser = new MySAXParser();
 		
 		try {
+			
 			SAXParser parser = factory.newSAXParser();
 			parser.parse(this.getUrl(), mySAXParser);
 			this.setHospital(mySAXParser.getHospital());
@@ -34,6 +38,5 @@ public class HelperXml extends MyThread{
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		
 	}
 }

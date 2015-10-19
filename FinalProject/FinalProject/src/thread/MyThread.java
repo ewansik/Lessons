@@ -23,11 +23,9 @@ public abstract class MyThread extends Thread{
 		return hospital;
 	}
 
-
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
 	}
-
 
 	public String getUrl() {
 		return urlDocument;
@@ -39,10 +37,10 @@ public abstract class MyThread extends Thread{
 	
 	@Override
 	public void run() {
-		Parsing();
+		parsing();
 	}
 
-	public BufferedReader UrlConnection()
+	public BufferedReader urlConnection()
 	{
 		URL url;
 		HttpURLConnection connection;
@@ -62,5 +60,5 @@ public abstract class MyThread extends Thread{
 		return in;
 	}
 	
-	public abstract void Parsing();
+	public abstract void parsing();
 }

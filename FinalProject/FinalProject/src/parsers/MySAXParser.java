@@ -28,13 +28,13 @@ public class MySAXParser extends DefaultHandler{
 	@Override 
 	public void startDocument() throws SAXException 
 	{ 
-	  System.out.println("Start parsing."); 
+	  //System.out.println("Start parsing."); 
 	} 
 	
 	@Override
 	public void endDocument() throws SAXException
 	{
-		System.out.println("End parsing."); 
+		//System.out.println("End parsing."); 
 	}
 	
 	@Override
@@ -80,11 +80,14 @@ public class MySAXParser extends DefaultHandler{
 				break;
 				
 			case "dateOfBirth":
-			try {
-				doctor.setDateOfBirth(format.parse(new String(ch,start,length)));
-			} catch (ParseException e) {
-				System.out.println(e.getMessage());
-			}
+				try
+				{
+					doctor.setDateOfBirth(format.parse(new String(ch,start,length)));
+				} 
+				catch (ParseException e) 
+				{
+					System.out.println(e.getMessage());
+				}
 				break;
 				
 			case "yearEperience":
