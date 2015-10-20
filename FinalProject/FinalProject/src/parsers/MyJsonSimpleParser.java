@@ -10,7 +10,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import model.Doctor;
+import model.Doctors;
 import model.Hospital;
 
 public class MyJsonSimpleParser {
@@ -19,7 +19,7 @@ public class MyJsonSimpleParser {
 	public static Hospital jsonParser(BufferedReader bufferedReader)
 	{
 		Hospital hospital = new Hospital();
-		Doctor doctor;
+		Doctors doctor;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 		JSONParser jsonParser = new JSONParser();
@@ -44,7 +44,7 @@ public class MyJsonSimpleParser {
 			
 			while(iterator.hasNext())
 			{
-				doctor = new Doctor();
+				doctor = new Doctors();
 				JSONObject obj = iterator.next();
 				
 				doctor.setId((int) (long) obj.get("id"));

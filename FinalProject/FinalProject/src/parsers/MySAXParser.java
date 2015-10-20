@@ -7,7 +7,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import model.Doctor;
+import model.Doctors;
 import model.Hospital;
 
 public class MySAXParser extends DefaultHandler{
@@ -15,7 +15,7 @@ public class MySAXParser extends DefaultHandler{
 	private String element;
 	boolean check = false;
 	boolean checkType = false;
-	private Doctor doctor;
+	private Doctors doctor;
 	private SimpleDateFormat format;
 	private Hospital hospital;
 
@@ -23,18 +23,6 @@ public class MySAXParser extends DefaultHandler{
 	{
 		format = new SimpleDateFormat("yyyy-MM-dd");
 		hospital = new Hospital();
-	}
-	
-	@Override 
-	public void startDocument() throws SAXException 
-	{ 
-	  //System.out.println("Start parsing."); 
-	} 
-	
-	@Override
-	public void endDocument() throws SAXException
-	{
-		//System.out.println("End parsing."); 
 	}
 	
 	@Override
@@ -60,7 +48,7 @@ public class MySAXParser extends DefaultHandler{
 				
 			case "id":
 				check = true;
-				doctor = new Doctor();
+				doctor = new Doctors();
 				doctor.setId(Integer.valueOf(new String(ch,start,length)));
 				break;
 				

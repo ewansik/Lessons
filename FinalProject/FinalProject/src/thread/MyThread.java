@@ -1,3 +1,7 @@
+/**
+ * Абстрактный класс предназначенный для реализации.
+ */
+
 package thread;
 
 import java.io.BufferedReader;

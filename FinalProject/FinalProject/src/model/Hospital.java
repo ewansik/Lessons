@@ -7,11 +7,11 @@ public class Hospital {
 	
 	private String name;
 	private String location;
-	private List<Doctor> doctors;
+	private List<Doctors> doctors;
 	
 	public Hospital()
 	{
-		doctors = new ArrayList<Doctor>();
+		doctors = new ArrayList<Doctors>();
 	}
 	
 	public String getName() {
@@ -26,10 +26,10 @@ public class Hospital {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public List<Doctor> getList() {
+	public List<Doctors> getList() {
 		return doctors;
 	}
-	public void setList(Doctor doctor) {
+	public void setList(Doctors doctor) {
 		this.doctors.add(doctor);
 	}
 }
