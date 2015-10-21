@@ -1,8 +1,3 @@
-/**
- * Абстрактный класс, наследуемый ок класса Thread. Реализует скачивание XML или JSON файлов.
- * Содержит абстрактный метод для реализации парсинга.
- */
-
 package thread;
 
 import java.io.BufferedReader;
@@ -16,7 +11,6 @@ import model.Hospital;
 
 public abstract class MyThread extends Thread{
 
-	//Объявление переменных.
 	private Hospital hospital;
 	private String urlDocument;
 	
@@ -29,9 +23,11 @@ public abstract class MyThread extends Thread{
 		return hospital;
 	}
 
+
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
 	}
+
 
 	public String getUrl() {
 		return urlDocument;
@@ -43,14 +39,10 @@ public abstract class MyThread extends Thread{
 	
 	@Override
 	public void run() {
-		parsing();
+		Parsing();
 	}
 
-	/**
-	 * Метод реализующий скачивание файла.
-	 * @return
-	 */
-	public BufferedReader urlConnection()
+	public BufferedReader UrlConnection()
 	{
 		URL url;
 		HttpURLConnection connection;
@@ -70,5 +62,5 @@ public abstract class MyThread extends Thread{
 		return in;
 	}
 	
-	public abstract void parsing();
+	public abstract void Parsing();
 }
