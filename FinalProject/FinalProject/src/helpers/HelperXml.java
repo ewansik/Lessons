@@ -1,5 +1,5 @@
 /**
- * 
+ * Класс HelperXml, наследуемый от MyThread.
  */
 package helpers;
 
@@ -16,17 +16,23 @@ import thread.MyThread;
 
 public class HelperXml extends MyThread{
 	
+	/**
+	 * Конструктор класса HelperXml. 
+	 * @param url
+	 */
 	public HelperXml(String url) {
 		super(url);
 	}
 
+	/**
+	 * Переопределение метода parsing() класса MyThread.
+	 */
 	@Override
 	public void parsing() {
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		MySAXParser mySAXParser = new MySAXParser();
 		
 		try {
-			
 			SAXParser parser = factory.newSAXParser();
 			parser.parse(this.getUrl(), mySAXParser);
 			this.setHospital(mySAXParser.getHospital());

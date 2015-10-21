@@ -1,5 +1,6 @@
 /**
- * Main class. 
+ * Класс Main. Необходим для взаимодействия пользователя с системой.
+ * Для завершение программы, необходимо ввести в консоль 'exit'.
  */
 
 package com.vynipox.glm;
@@ -10,12 +11,18 @@ import manager.Manager;
 
 public class Main {
 	
+	//объявление глобальных статических переменных.
 	private static Scanner scanner = new Scanner(System.in);
 	private static Manager manager = Manager.getInstance();
 	
+	/**
+	 * Метод main(). 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 	
-		System.out.println("Welcome to our hospital!");
+		System.out.println("Добро пожаловать в нашу больницу!\n");
+		System.out.println("Для начала работы, вам необходимо получить информацию с файла.");
 		
 		choiceOfParsing();
 		choiseOperation();
@@ -23,10 +30,17 @@ public class Main {
 		scanner.close();
 	}
 			
+	/**
+	 * Статический метод choiseOperation(). Позволяет пользователю выбрать определенное действие, зависящее от параметра.
+	 */
 	public static void choiseOperation()
 	{
 		boolean check = false;
 		
+		System.out.println();
+		System.out.println("Теперь вы можете использовать данные для личных целей.");
+		
+		//Запуск бесконечного цикла, для того, чтобы пользователь мог повторно выбрать действие.
 		while(!check)
 		{
 			printMenu(4);
@@ -34,18 +48,22 @@ public class Main {
 			String inputString = scanner.nextLine();
 			checkInput(inputString);
 			
+			//Проверка на правильность ввода параметра пользователем.
 			if(inputString.matches("^[1-5]$"))
 			{
 				switch(inputString)
 				{
+					//Вызов метода поиска данных о больнице.
 					case "1":
 						manager.findCoordinates();
 						break;
 						
+					//Вызов метода просмотра докторов.
 					case "2":
 						manager.viewDoctors();
 						break;
 						
+					//Вызов метода поиска доктора по специализации.
 					case "3":
 						printMenu(6);
 						inputString = scanner.nextLine();
@@ -58,7 +76,8 @@ public class Main {
 							printMenu(1);
 						}
 						break;
-						
+					
+					//Вызов метода сортировки докторов. Сортировки либо по имени, либо по опыту.
 					case "4":
 						printMenu(5);
 						inputString = scanner.nextLine();
@@ -70,6 +89,11 @@ public class Main {
 						else{
 							printMenu(1);	
 						}
+						break;
+						
+					case "5":
+						printMenu(7);
+						System.exit(-1);
 						break;
 						
 					default:
@@ -84,10 +108,14 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Статический метод chjiseOfParsing() позволяет пользователю выбрать метод парсинга. 
+	 */
 	public static void choiceOfParsing()
 	{
 		boolean check = false;
 		
+		//Запуск бесконечного цикла, для того, чтобы пользователь мог повторно выбрать действие.
 		while(!check)
 		{
 			printMenu(2);
@@ -95,8 +123,10 @@ public class Main {
 			String inputString = scanner.nextLine();
 			checkInput(inputString);
 			
+			//Проверка на правильность ввода параметра пользователем.
 			if(inputString.matches("^[1-3]$")){
 				
+				//Вызов метода парсинга.
 				manager.getParser(inputString);
 				
 				while(!check)
@@ -123,52 +153,65 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Статический метод printMenu() реализует вывод информации предназначенной для пользователя.
+	 * @param menuNumber
+	 */
 	public static void printMenu(int menuNumber)
 	{
 		switch(menuNumber)
 		{
 			case 1:
-				System.out.println("Wrong data, please try again!");
+				System.out.println();
+				System.out.println("Вы ввели неверные данные, повторите попытку!");
 				break;
 				
 			case 2:
-				System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
-				System.out.println("Please, select the type of parsing:\n 1 - XML parsing. \n 2 - Json simple parsing. \n 3 - Json Gson parsing.");
-				System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println();
+				System.out.println("Пожалуйста, выберите тип парсера для получения информации:\n 1 - XML парсер. \n 2 - Json simple парсер. \n 3 - Json Gson парсер.");
+				System.out.print("Введите цифру:");
 				break;
 				
 			case 3:
-				System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
-				System.out.println("Do you want to parse the file again?\n 1 - Yes. \n 2 - No.");
-				System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println();
+				System.out.println("Вы хотите использовать парсер еще раз?\n 1 - Да. \n 2 - Нет.");
+				System.out.print("Введите цифру:");
 				break;
 				
 			case 4:
-				System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
-				System.out.println("Please, select the type of operation:\n 1 - Find the coordinates. \n 2 - View doctors."
-						+ " \n 3 - Find doctors. \n 4 - Sort doctors.");
-				System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println();
+				System.out.println("Пожалуйста, выберите необходимую операцию:\n 1 - Поиск данных о больнице. \n 2 - Просмотр доступных докторов."
+						+ " \n 3 - Поиск доктора по специализации. \n 4 - Сортировка докторов. \n 5 - Покинуть больницу.");
+				System.out.print("Введите цифру:");
 				break;
 				
 			case 5:
-				System.out.print("Please, select the type of sorting:\n 1 - Sorting by expirience. \n 2 - Sorting by name.");
+				System.out.println();
+				System.out.println("Пожалуйста, выберите тип сортировки:\n 1 - Сортировка по опыту. \n 2 - Сортировка по имени.");
+				System.out.print("Введите цифру:");
 				break;
 					
 			case 6:
-				System.out.print("Please, enter the doctor specialization. You can enter 3 or more symbols:");
+				System.out.println();
+				System.out.print("Пожалуйста, введите искомую специализацию. Вы можете ввести три или более символа:");
+				break;
+				
+			case 7:
+				System.out.println();
+				System.out.println("Вы покинули нашу больницу. Хорошего вам дня!");
 				break;
 		}
 	}
 	
 	/**
-	 * Check if user enter 'exit'.
+	 * Статический метод, реализующий завершение программы.
 	 * @param input
 	 */
 	public static void checkInput(String input)
 	{
 		if(input.toLowerCase().equals("exit"))
 		{
-			System.out.println("You have completed work the program. Have a nice day!");
+			printMenu(7);
 			System.exit(-1);
 		}
 	}

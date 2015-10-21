@@ -1,3 +1,6 @@
+/**
+ * Класс Hospital, предоставляющий собой модель данных.
+ */
 package model;
 
 import java.util.ArrayList;
@@ -5,10 +8,14 @@ import java.util.List;
 
 public class Hospital {
 	
+	//Объявление переменных.
 	private String name;
 	private String location;
 	private List<Doctors> doctors;
 	
+	/**
+	 * Конструктор класса Hospital.
+	 */
 	public Hospital()
 	{
 		doctors = new ArrayList<Doctors>();

@@ -41,6 +41,9 @@ public abstract class MyThread extends Thread{
 		this.urlDocument = url;
 	}
 	
+	/**
+	 * Переопределение метода run() класса Thread.
+	 */
 	@Override
 	public void run() {
 		parsing();
@@ -70,5 +73,8 @@ public abstract class MyThread extends Thread{
 		return in;
 	}
 	
+	/**
+	 * Абстрактный метод для парсинга файла.
+	 */
 	public abstract void parsing();
 }

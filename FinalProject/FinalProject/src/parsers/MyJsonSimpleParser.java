@@ -1,3 +1,7 @@
+/**
+ * Класс MyJsonSimpleParser. Предназначен для парсинга Json файлов при помощи библиотеки Json-simple.
+ */
+
 package parsers;
 
 import java.io.BufferedReader;
@@ -15,9 +19,15 @@ import model.Hospital;
 
 public class MyJsonSimpleParser {
 
+	/**
+	 * Статический метод jsonParser().
+	 * @param bufferedReader
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static Hospital jsonParser(BufferedReader bufferedReader)
 	{
+		//Объявление переменных.
 		Hospital hospital = new Hospital();
 		Doctors doctor;
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -31,17 +41,19 @@ public class MyJsonSimpleParser {
 			hospital.setName((String)jsonObject.get("name"));
 			hospital.setLocation((String)jsonObject.get("location"));
 			
+			//Проверяем, имеется ли массив элементов в файле.
 			if(jsonObject.containsKey("doctors"))
 			{
 				jsonArray = (JSONArray)jsonObject.get("doctors");
 			}
 			else
 			{
-				System.out.println("You have wrong format of JSON document.");
+				System.out.println("Не верный формат документа!");
 			}
 			
 			Iterator<JSONObject> iterator = jsonArray.iterator();
 			
+			//Записываем полученные данных в модель.
 			while(iterator.hasNext())
 			{
 				doctor = new Doctors();

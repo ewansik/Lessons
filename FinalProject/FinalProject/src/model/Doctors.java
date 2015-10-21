@@ -1,3 +1,6 @@
+/**
+ * Класс Doctors, представляющий собой модель данных.
+ */
 package model;
 
 import java.text.SimpleDateFormat;
@@ -7,6 +10,7 @@ import java.util.List;
 
 public class Doctors {
 
+	//Объявление переменных.
 	private int id;
 	private String name;
 	private String degree;
@@ -16,6 +20,9 @@ public class Doctors {
 	private boolean visible;
 	private SimpleDateFormat format;
 	
+	/**
+	 * Конструктор класса Doctors.
+	 */
 	public Doctors()
 	{
 		format = new SimpleDateFormat("yyyy-MM-dd");
@@ -68,6 +75,9 @@ public class Doctors {
 		this.visible = visible;
 	}
 
+	/**
+	 * Переопределение метода hashCOde().
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +92,9 @@ public class Doctors {
 		return result;
 	}
 
+	/**
+	 * Переопределение метода equals().
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -120,9 +133,12 @@ public class Doctors {
 		return true;
 	}
 
+	/**
+	 * Переопределение метода toString().
+	 */
 	@Override
 	public String toString() {
-		return "Doctor - Id:" + id + ", Name:" + name + ", Degree:" + degree + ", Birthday=" + format.format(dateOfBirth)
-				+ ", Experience:" + yearEperience + ", Specialization:" + typeList + ", Working=" + visible + ".";
+		return "Доктор - Идентификатор:" + id + ", ФИО:" + name + ", Степень:" + degree + ", День рождение:" + format.format(dateOfBirth)
+				+ ", Опыт работы(лет):" + yearEperience + ", Специализация:" + typeList + ", Рабочий день:" + visible + ".";
 	}
 }

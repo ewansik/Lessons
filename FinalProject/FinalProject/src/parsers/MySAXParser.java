@@ -1,3 +1,7 @@
+/**
+ * Класс MySAXParser. Предназначен для парсинга XML дфайлов.
+ */
+
 package parsers;
 
 import java.text.ParseException;
@@ -12,6 +16,7 @@ import model.Hospital;
 
 public class MySAXParser extends DefaultHandler{
 
+	//Объявление переменных.
 	private String element;
 	boolean check = false;
 	boolean checkType = false;
@@ -19,27 +24,38 @@ public class MySAXParser extends DefaultHandler{
 	private SimpleDateFormat format;
 	private Hospital hospital;
 
+	//Конструктор класса MySAXParser.
 	public MySAXParser()
 	{
 		format = new SimpleDateFormat("yyyy-MM-dd");
 		hospital = new Hospital();
 	}
 	
+	/**
+	 * Переопределение метода startElement(). Вызывается при нахождение элемента в XML файле.
+	 */
 	@Override
 	public void startElement(String namespace, String localName, String qName, Attributes attr) throws SAXException
 	{
 		element = qName;
 	}
 	
+	/**
+	 * Переопределение метода endElement(). Вызывается при нахождение закрывающегося тега элемента.
+	 */
 	@Override
 	public void endElement(String namespace, String localName, String qName) throws SAXException
 	{
 		element = "";
 	}
 	
+	/**
+	 * Переопределение метода characters(). Необходи для разбора данных в XML файле.
+	 */
 	@Override 
 	public void characters(char[] ch,int start,int length) throws SAXException
 	{
+		//Берем каждый элемент в файле и записываем значение этого элемента в модель данных.
 		switch(element)
 		{
 			case "location":

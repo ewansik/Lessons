@@ -1,2 +1,14 @@
 eclipse.preferences.version=1
+encoding//src/com/vynipox/glm/Main.java=UTF-8
+encoding//src/constants/MyConstants.java=UTF-8
+encoding//src/factory/ParserFactory.java=UTF-8
+encoding//src/helpers/HelperJsonGson.java=UTF-8
+encoding//src/helpers/HelperJsonSimple.java=UTF-8
+encoding//src/helpers/HelperXml.java=UTF-8
+encoding//src/manager/Manager.java=UTF-8
+encoding//src/model/Doctors.java=UTF-8
+encoding//src/model/Hospital.java=UTF-8
+encoding//src/parsers/MyGsonParser.java=UTF-8
+encoding//src/parsers/MyJsonSimpleParser.java=UTF-8
+encoding//src/parsers/MySAXParser.java=UTF-8
 encoding//src/thread/MyThread.java=UTF-8
