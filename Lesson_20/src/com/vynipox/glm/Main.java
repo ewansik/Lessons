@@ -18,7 +18,7 @@ public class Main {
 		
 		while(!check)
 		{
-			System.out.print("Введите размер массива от 1 до 99, число должно быть нечетным:");
+			System.out.print("Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР° РѕС‚ 1 РґРѕ 99, С‡РёСЃР»Рѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РЅРµС‡РµС‚РЅС‹Рј:");
 			inputString = scanner.nextLine();
 			if(Integer.valueOf(inputString) < 100 &&  Integer.valueOf(inputString) > 0 && Integer.valueOf(inputString)%2 != 0)
 			{
@@ -28,14 +28,14 @@ public class Main {
 			}	
 			else
 			{
-				System.out.println("Укажите размер значения в цифрах, от 1 до 99");
+				System.out.println("РЈРєР°Р¶РёС‚Рµ СЂР°Р·РјРµСЂ Р·РЅР°С‡РµРЅРёСЏ РІ С†РёС„СЂР°С…, РѕС‚ 1 РґРѕ 99");
 			}
 		}
 		
 		for(int i = 0; i<a.length;i++)
 		{
 			checkInput = false;
-			System.out.printf("Введите %d - ый элемент массива:",i);	
+			System.out.printf("Р’РІРµРґРёС‚Рµ %d - С‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°:",i);	
 			while(!checkInput)
 			{
 				inputString = scanner.nextLine();
@@ -46,7 +46,7 @@ public class Main {
 				}
 				else
 				{
-					System.out.println("Вы ввели неверные данные, повторите попытку.");
+					System.out.println("Р’С‹ РІРІРµР»Рё РЅРµРІРµСЂРЅС‹Рµ РґР°РЅРЅС‹Рµ, РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ.");
 				}
 			}
 		}
@@ -60,6 +60,6 @@ public class Main {
 		}
 		
 		scanner.close();
-		System.out.printf("Результат: %d",result);
+		System.out.printf("Р РµР·СѓР»СЊС‚Р°С‚: %d",result);
 	}
 }
